@@ -12,7 +12,7 @@
 
 ## インストール方法
 
-[ここ](https://www.dropbox.com/s/82fsvh12sfcdnls/PonBonRush.zip?dl=0) から実行ファイル群をダウンロードしてください。
+[ここ](https://www.dropbox.com/sh/vv3gc9hj7myd5m6/AAC1eCgIz-Ro8WfOmFbQNIYwa?dl=0) から実行ファイル群をダウンロードしてください。
 
 
 
