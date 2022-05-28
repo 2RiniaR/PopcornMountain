@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using UniRx;
-using UniRx.Async;
+using Cysharp.Threading.Tasks;
 using UniRx.Triggers;
 
 

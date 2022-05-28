@@ -40,27 +40,30 @@ namespace PopcornMountain.MainGameScene.Popcorn {
 
             // ダミーオブジェクトを生成する
             dummyObject = new GameObject(name + "(Dummy)");
+            
+            dummyObject = Instantiate(gameObject);
+            foreach (var component in dummyObject.GetComponents<Component>())
+            {
+                if (component is Rigidbody2D rigidBody)
+                {
+                    dummyRigidbody = rigidBody;
+                    continue;
+                }
 
-            // Transformの設定
-            dummyObject.transform.localScale = transform.localScale;
-            dummyObject.transform.position = transform.position;
-            dummyObject.transform.rotation = transform.rotation;
+                if (component is SpriteRenderer dummyRenderer)
+                {
+                    dummyRenderer.sortingLayerName = "GameObjects";
+                    dummyRenderer.sortingOrder = 1;
+                    dummyRenderer.color = new Color(1f, 1f, 1f, 0.5f);
+                }
 
-            // Rigidbodyの設定
-            dummyRigidbody = dummyObject.AddComponent(_rigidbody);
-
-            // Colliderの設定
-            var dummyCollider = dummyObject.AddComponent(_collider);
-
-            // Sprite Rendererの設定
-            var dummyRenderer = dummyObject.AddComponent(_spriteRenderer);
-            dummyRenderer.sortingLayerName = "GameObjects";
-            dummyRenderer.sortingOrder = 1;
-            dummyRenderer.color = new Color(1f, 1f, 1f, 0.5f);
-
-            // 泡のエフェクトの設定
-            // var dummyBubbleParticle = dummyObject.AddComponent<PopcornBubbleParticleView>();
-            // dummyBubbleParticle.SetBubbleParticle
+                if (component is Transform or Collider2D)
+                {
+                    continue;
+                }
+                
+                Destroy(component);
+            }
 
             // 熱の伝達元をダミーに変更する
             dummyHeatReceiver = dummyObject.AddComponent<PopcornHeatReceiverView>();

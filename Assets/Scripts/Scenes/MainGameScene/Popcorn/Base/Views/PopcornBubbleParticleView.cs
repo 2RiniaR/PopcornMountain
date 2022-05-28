@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +10,11 @@ namespace PopcornMountain.MainGameScene.Popcorn {
 
         [SerializeField]
         private ParticleSystem bubbleParticle = null;
-        private static Mesh baseMesh = null;
-        private List<CombineInstance> combineInstances = new List<CombineInstance>();
+        // private static Mesh baseMesh = null;
+        // private List<CombineInstance> combineInstances = new List<CombineInstance>();
         private float power = 0f;
 
-
+/*
         private void Awake() {
             if (bubbleParticle == null) return;
             var s = bubbleParticle.shape;
@@ -24,11 +25,15 @@ namespace PopcornMountain.MainGameScene.Popcorn {
         private void Update() {
             if (bubbleParticle == null) return;
             var s = bubbleParticle.shape;
-            s.mesh.Clear();
+            
             if (combineInstances.Count > 0) {
                 SetEmission(this.power);
-                s.mesh.CombineMeshes(combineInstances.ToArray());
-            } else {
+                var newMesh = new Mesh();
+                newMesh.CombineMeshes(combineInstances.ToArray());
+                s.mesh = newMesh;
+            } else
+            {
+                s.mesh = new Mesh();
                 StopEmission();
             }
         }
@@ -72,7 +77,12 @@ namespace PopcornMountain.MainGameScene.Popcorn {
             baseMesh.RecalculateNormals();
             baseMesh.RecalculateBounds();
         }
+*/
 
+        private void Update()
+        {
+            SetEmission(power);
+        }
 
         private void SetEmission(float power) {
             if (bubbleParticle == null) return;

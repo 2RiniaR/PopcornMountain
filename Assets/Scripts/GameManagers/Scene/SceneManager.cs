@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UniRx;
-using UniRx.Async;
+using Cysharp.Threading.Tasks;
 using PopcornMountain.Curtain;
 
 

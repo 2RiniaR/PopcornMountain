@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UniRx.Async;
+using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
 
 
 namespace PopcornMountain.MainGameScene.Popcorn {
@@ -26,17 +27,20 @@ namespace PopcornMountain.MainGameScene.Popcorn {
             await UniTask.Yield(PlayerLoopTiming.FixedUpdate);
 
             // ダミーオブジェクトを生成する
-            penetrationSimulateObject = new GameObject(name + "(Dummy2)").AddComponent<Rigidbody2D>();
-            penetrationSimulateObject.transform.localScale = transform.localScale;
-            penetrationSimulateObject.gameObject.layer = LayerMask.NameToLayer("PopcornStrict");
+            var dummyCollider = Instantiate(_collider);
+            dummyCollider.isTrigger = false;
+            
+            var dummyObject = dummyCollider.gameObject;
+            dummyObject.layer = LayerMask.NameToLayer("PopcornStrict");
+            dummyObject.transform.localScale = transform.localScale;
+            
+            penetrationSimulateObject = dummyObject.AddComponent<Rigidbody2D>();
             penetrationSimulateObject.position = _rigidbody.position;
             penetrationSimulateObject.rotation = _rigidbody.rotation;
             penetrationSimulateObject.bodyType = RigidbodyType2D.Dynamic;
             penetrationSimulateObject.gravityScale = 0f;
             penetrationSimulateObject.mass = 0f;
             penetrationSimulateObject.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-            var dummyCollider = penetrationSimulateObject.gameObject.AddComponent(_collider);
-            dummyCollider.isTrigger = false;
         }
 
 
