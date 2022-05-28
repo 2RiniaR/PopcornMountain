@@ -23,16 +23,23 @@ namespace PopcornMountain.LobbyScene.Menu {
                 .Publish()
                 .RefCount();
 
-            OnPushHowToButtonObservable = howtoButton
+            if (howtoButton != null)
+            {
+                OnPushHowToButtonObservable = howtoButton
                 .OnClickAsObservable()
                 .AsUnitObservable()
                 .Publish()
                 .RefCount();
+            }
         }
 
         public void SetEnable(bool isEnable) {
             returnButton.interactable = isEnable;
-            howtoButton.interactable = isEnable;
+
+            if (howtoButton != null)
+            {
+                howtoButton.interactable = isEnable;
+            }
         }
 
     }

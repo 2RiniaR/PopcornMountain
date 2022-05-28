@@ -18,13 +18,16 @@ namespace PopcornMountain.StartScene {
                 })
                 .AddTo(this);
 
-            // 終了ボタンが押された時、ゲームを終了する
-            startMenuView.exitButtonClickObservable
-                .Subscribe(_ => {
-                    Manager.SetTransitionEnabled(false);
-                    SceneManager.ExitGame();
-                })
-                .AddTo(this);
+            if (startMenuView.exitButtonClickObservable != null)
+            {
+                // 終了ボタンが押された時、ゲームを終了する
+                startMenuView.exitButtonClickObservable
+                    .Subscribe(_ => {
+                        Manager.SetTransitionEnabled(false);
+                        SceneManager.ExitGame();
+                    })
+                    .AddTo(this);
+            } 
 
             Manager.OnChangeIsTransitionEnabled
                 .Subscribe(isEnable => startMenuView.SetEnable(isEnable))

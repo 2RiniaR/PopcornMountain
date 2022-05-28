@@ -26,11 +26,14 @@ namespace PopcornMountain.StartScene {
                 .Publish()
                 .RefCount();
 
-            exitButtonClickObservable = exitButton
-                .OnClickAsObservable()
-                .AsUnitObservable()
-                .Publish()
-                .RefCount();
+            if (exitButton != null)
+            {
+                exitButtonClickObservable = exitButton
+                    .OnClickAsObservable()
+                    .AsUnitObservable()
+                    .Publish()
+                    .RefCount();
+            }
 
             startMultiPlayButtonClickObservable.Subscribe(_ => PlayStartGameSound()).AddTo(this);
         }
@@ -41,7 +44,11 @@ namespace PopcornMountain.StartScene {
 
         public void SetEnable(bool isEnable) {
             startMultiPlayButton.interactable = isEnable;
-            exitButton.interactable = isEnable;
+
+            if (exitButton != null)
+            {
+                exitButton.interactable = isEnable;
+            }
         }
 
     }
